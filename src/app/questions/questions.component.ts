@@ -13,7 +13,8 @@ export class QuestionsComponent implements OnInit {
   constructor(
     private _gormservice: GformServiceService,
     private router: Router
-  ) {}  ngOnInit(): void {
+  ) {}
+  ngOnInit(): void {
     // this.questions = this._gormservice.getQuestionsData();
     this._gormservice.getQuestions().subscribe((questions) => {
       this.questions = questions;
@@ -27,6 +28,7 @@ export class QuestionsComponent implements OnInit {
 
   optionClicked(options: any, questionIndex: any) {
     this.userAnswers[questionIndex] = options;
+    
   }
 
   preQues() {
@@ -40,7 +42,9 @@ export class QuestionsComponent implements OnInit {
     let question = this.questions[this.currentQuestionNo];
     let oldAnswer = this.userAnswers[question.id];
     if (oldAnswer) {
-      let previousAnswerIndex = this.questions[this.currentQuestionNo].options.findIndex((res:any) => res == oldAnswer);
+      let previousAnswerIndex = this.questions[
+        this.currentQuestionNo
+      ].options.findIndex((res: any) => res == oldAnswer);
       // let previousAnswerIndex = this.questions[
       //   this.currentQuestionNo
       // ].options.findIndex((res: any) => res == oldAnswer);
@@ -60,5 +64,27 @@ export class QuestionsComponent implements OnInit {
       this._gormservice.userAnswer = this.userAnswers;
       this.router.navigateByUrl('/submit');
     }
+  }
+
+  clear() {
+    this.selectedIndex = '';
+  }
+
+  checkAnswer() {
+    this.questions.forEach((question: any) => {
+      const selectedOption = question.selectedOption;
+      const correctAnswer = question.correctAnswer;
+      const isCorrect = this.compareArray(selectedOption, correctAnswer);
+      console.log('Question:', question.question);
+      console.log('selectedoption', selectedOption);
+      console.log('iscorrect:', isCorrect);
+    });
+  }
+
+  compareArray(arr1: any[], arr2: any[]): boolean {
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+    return arr1.every((option) => arr2.includes(option));
   }
 }

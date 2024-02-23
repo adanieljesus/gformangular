@@ -9,7 +9,7 @@ export class GformServiceService {
   private apiUrl = 'http://localhost:3000/questions';
   constructor(private http: HttpClient) {}
 
-  userAnswer= {};
+  userAnswer = {};
 
   getQuestions(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
