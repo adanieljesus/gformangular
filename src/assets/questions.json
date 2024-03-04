@@ -85,29 +85,29 @@
     },
     {
       "id": 9,
-      "question": "Which decorator allows you to define styles for a component?",
+      "question": "what is junk food?",
       "options": [
-        "@Style()",
-        "@ViewStyle()",
-        "@ComponentStyle()",
-        "@Component({styles: …})"
+        "cakes",
+        "biscuits",
+        "burgers",
+        "fish"
       ],
-      "answer": ["@Component({styles: …})", "@Style()"],
+      "answer": ["cakes", "biscuits","burgers"],
       "selectedOptions": []
     },
     {
       "id": 10,
-      "question": "What is the purpose of the async pipe in Angular?",
+      "question": "What are the language is need to angular?",
       "options": [
-        "To make asynchronous HTTP requests",
-        "To automatically unsubscribe from observables or promises",
-        "To pause the execution of the application",
-        "To run change detection asynchronously"
+        "HTML",
+        "JAVA",
+        "Type script",
+        "CSS"
       ],
       "answer": [
-        "To automatically unsubscribe from observables or promises",
-        "To pause the execution of the application",
-        "To run change detection asynchronously"
+        "HTML",
+        "Type script",
+        "CSS"
       ],
       "selectedOptions": []
     }

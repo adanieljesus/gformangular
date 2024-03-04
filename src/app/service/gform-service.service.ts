@@ -10,6 +10,8 @@ export class GformServiceService {
   constructor(private http: HttpClient) {}
 
   userAnswer = {};
+  userAnswers = [];
+  userAnswers1 = [];
 
   getQuestions(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);

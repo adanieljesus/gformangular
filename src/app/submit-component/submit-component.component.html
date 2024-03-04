@@ -1,6 +1,6 @@
 <h1>Results you scored : {{ point }} / {{ questions.length }}</h1>
-<div *ngFor="let question of questions" class="question-container">
-  <div class="container">
+<div *ngFor="let question of questions; let i=index" class="question-container">
+  <div class="container" *ngIf="i!=9 && i!=8">
     <h3>{{ question.id }}. {{ question.question }}</h3>
     <!-- <p
       [ngClass]="{
@@ -11,11 +11,37 @@
       <b>Your answer: {{ userAnswers[question.id] }} <br><br> Correct answer:
         {{ question.answer }}</b>
     </p> -->
-    <p class="{{ getResult(userAnswers[question.id], question.answer) }}">
+    <p class="{{ getResult(userAnswers[question.id], question.answer,i) }}">
       <b
         >Your answer: {{ userAnswers[question.id] }} <br /><br />
         Correct answer: {{ question.answer }}</b
       >
+    </p>
+  </div>
+  <div class="container" *ngIf="i==8">
+    <h3>{{ question.id }}. {{ question.question }}</h3>
+    <p class="{{ getResult(userAnswers1, question.answer,i) }}">
+      <b>Your answer: 
+        <span *ngFor="let Useranswer of userAnswers1;let i=index">
+          {{i+1+'. '+  Useranswer }} <br>
+        </span>
+        Correct answers:<br>
+        <span *ngFor="let Answer of question.answer;let i=index">
+          {{i+1+'. '+  Answer }} <br>
+        </span></b>
+    </p>
+  </div>
+  <div class="container" *ngIf="i==9">
+    <h3>{{ question.id }}. {{ question.question }}</h3>
+    <p class="{{ getResult(userAnswers2, question.answer,i) }}">
+      <b>Your answer: 
+        <span *ngFor="let Useranswer of userAnswers2;let i=index">
+          {{i+1+'. '+  Useranswer }} <br>
+        </span>
+        Correct answers:<br>
+        <span *ngFor="let Answer of question.answer;let i=index">
+          {{i+1+'. '+  Answer }} <br>
+        </span></b>
     </p>
   </div>
 </div>

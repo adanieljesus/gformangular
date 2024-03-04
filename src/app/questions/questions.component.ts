@@ -28,7 +28,6 @@ export class QuestionsComponent implements OnInit {
 
   optionClicked(options: any, questionIndex: any) {
     this.userAnswers[questionIndex] = options;
-    
   }
 
   preQues() {
@@ -36,6 +35,36 @@ export class QuestionsComponent implements OnInit {
       this.currentQuestionNo--;
       this.loadAnswer();
     }
+  }
+  checkedOptions: { [key: string]: boolean } = {};
+ checkopt:any=[];
+ checkopt1:any=[];
+  updateCheckedOptions(option: string,i:number): void {
+    console.log(i)
+    if(i==8)
+    {
+      if(this.checkedOptions[option])
+    {
+      if(!this.checkopt.includes(option))
+      this.checkopt.push(option)
+    }
+    else{
+      if(this.checkopt.includes(option))
+      this.checkopt.splice(this.checkopt.indexOf(option),1)
+    }
+    }
+    else{
+      if(this.checkedOptions[option])
+    {
+      if(!this.checkopt1.includes(option))
+      this.checkopt1.push(option)
+    }
+    else{
+      if(this.checkopt1.includes(option))
+      this.checkopt1.splice(this.checkopt1.indexOf(option),1)
+    }
+    }
+    
   }
 
   loadAnswer() {
@@ -45,9 +74,6 @@ export class QuestionsComponent implements OnInit {
       let previousAnswerIndex = this.questions[
         this.currentQuestionNo
       ].options.findIndex((res: any) => res == oldAnswer);
-      // let previousAnswerIndex = this.questions[
-      //   this.currentQuestionNo
-      // ].options.findIndex((res: any) => res == oldAnswer);
       this.selectedIndex = '' + previousAnswerIndex;
     } else {
       this.selectedIndex = '';
@@ -56,12 +82,13 @@ export class QuestionsComponent implements OnInit {
 
   submitAnswers() {
     this.selectedIndex = '';
-    console.log('User Answers:', this.userAnswers);
     if (this.currentQuestionNo + 1 < this.questions.length) {
       this.currentQuestionNo++;
       this.loadAnswer();
     } else {
       this._gormservice.userAnswer = this.userAnswers;
+      this._gormservice.userAnswers = this.checkopt;
+      this._gormservice.userAnswers1 = this.checkopt1;
       this.router.navigateByUrl('/submit');
     }
   }

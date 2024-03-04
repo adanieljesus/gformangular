@@ -8,48 +8,38 @@
       <div>
         <div class="option">
           <label>
-            <div
-              *ngFor="
+            <div *ngFor="
                 let option of questions[currentQuestionNo].options;
                 let i = index
-              "
-            >
+              ">
               <div *ngIf="questions[currentQuestionNo + 2]; else elseBlock">
-                <mat-radio-button
-                  (click)="
+                <mat-radio-button (click)="
                     optionClicked(option, questions[currentQuestionNo].id);
                     selectedIndex = '' + i
-                  "
-                  [checked]="selectedIndex == '' + i"
-                  class="{{
+                  " [checked]="selectedIndex == '' + i" class="{{
                     selectedIndex == '' + i ? 'optiondisabled' : 'option'
-                  }}"
-                >
-                  {{ option }}</mat-radio-button
-                >
+                  }}">
+                  {{ option }}</mat-radio-button>
               </div>
               <ng-template #elseBlock>
-                <input type="checkbox" class="checkbox"  />{{ option }}
+                <input type="checkbox" class="checkbox" 
+                       [(ngModel)]="checkedOptions[option]" 
+                       (change)="updateCheckedOptions(option,currentQuestionNo)" />{{ option }}
               </ng-template>
-            </div>
-          </label>
+              <!-- <ng-template #elseBlock>
+                <input type="checkbox" class="checkbox" />{{ option }}
+              </ng-template> -->
+            </div>          </label>
           <div class="link">
             <a (click)="clear()">Clear</a>
           </div>
         </div>
       </div>
       <hr />
-      <span
-        >{{ currentQuestionNo + 1 }} of {{ questions.length }} Questions</span
-      >
+      <span>{{ currentQuestionNo + 1 }} of {{ questions.length }} Questions</span>
       <div class="btn">
         <div class="left">
-          <button
-            mat-raised-button
-            color="primary"
-            [disabled]="currentQuestionNo === 0"
-            (click)="preQues()"
-          >
+          <button mat-raised-button color="primary" [disabled]="currentQuestionNo === 0" (click)="preQues()">
             Prev
           </button>
         </div>
